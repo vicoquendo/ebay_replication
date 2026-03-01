@@ -47,22 +47,25 @@ values = {
     "ci_high": ci_upper
 }
 
-latex_content = rf"""
-\begin{{table}}[h]
+latex_content = r"""\begin{table}[h]
 \centering
-\caption{{Difference-in-Differences Estimate of the Effect of Paid Search on Revenue}}
-\begin{{tabular}}{{lc}}
+\caption{Difference-in-Differences Estimate of the Effect of Paid Search on Revenue}
+\begin{tabular}{lcc}
 \hline
-& Log Scale \\
+& Log Scale & Levels (exp) \\
 \hline
-Point Estimate ($\hat{{\gamma}}$)      & {values["gamma"]:.4f} \\
-Standard Error                        & {values["se"]:.4f} \\
-95\% CI                               & $[{values["ci_low"]:.4f}, \; {values["ci_high"]:.4f}]$ \\
+Point Estimate ($\hat{\gamma}$) & $%.4f$ & $%.4f$ \\
+Standard Error & $%.4f$ & --- \\
+95\%% CI & $[%.4f, \; %.4f]$ & $[%.4f, \; %.4f]$ \\
 \hline
-\end{{tabular}}
-\label{{tab:did}}
-\end{{table}}
-""".strip()
+\end{tabular}
+\label{tab:did}
+\end{table}""" % (gamma_hat, gamma_hat_exp, standard_error, ci_lower, ci_upper, ci_lower_exp, ci_upper_exp)
 
 with open('output/tables/did_table.tex', 'w', encoding='utf-8') as f:
     f.write(latex_content)
+    
+# Exponentiated (levels) results
+gamma_hat_exp = np.exp(gamma_hat)
+ci_lower_exp = np.exp(ci_lower)
+ci_upper_exp = np.exp(ci_upper)
