@@ -26,5 +26,11 @@ clean:
 #	* It will skip figure_5_3.png and clean
 
 # 3. If you edit paper/paper.tex, which targets will Make rebuild? Which targets will it skip?
-#	* It will rebuild preprocessing and paper compilation
-#	* It will skip DID Estimation and clean.  I wonder if the copy paste from your source to the .PDF cut off more than you wanted...? Shouldn't it recompile the whole paper?
+#	* It will rebuild preprocessing, did analysis, and paper compilation
+#	* It will skip clean
+
+###REFLECTIONS FROM VIC
+# Makefile captures dependencies in an explicit way, through targets.
+# Makefile helps collaborators understand the order of processing steps required.
+# Makefile helps people understand what a "clean" reproduction requires.
+# Makefile makes happiness explicit.
